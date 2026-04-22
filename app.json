@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "UX UI Kiro",
+    "slug": "ux-ui-kiro",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": ["**/*"]
+  }
+}
