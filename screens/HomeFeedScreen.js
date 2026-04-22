@@ -118,12 +118,14 @@ const NAV_ITEMS = [
 
 // ─── SUB-COMPONENTS ──────────────────────────────────────────────────────────
 
+// Figma: Group 154/155/156/157 - Stat Cards
 function StatCard({ value, label, bg, color }) {
   return (
     <View
       className="flex-1 items-center justify-center rounded-[12px] py-[10px]"
       style={{ backgroundColor: bg }}
     >
+      {/* Figma: Frame 237 - Stat Content */}
       <Text
         className="text-[20px] leading-[21px]"
         style={{ fontFamily: "PlusJakartaSans_700Bold", color }}
@@ -140,6 +142,7 @@ function StatCard({ value, label, bg, color }) {
   );
 }
 
+// Figma: Group 167/168/169/170 - Job Card
 function JobCard({ job, onToggleSave, onPress }) {
   return (
     <TouchableOpacity
@@ -147,20 +150,20 @@ function JobCard({ job, onToggleSave, onPress }) {
       onPress={() => onPress(job)}
     >
       <View className="flex-row items-start">
-        {/* Logo */}
+        {/* Figma: Group 159 - Company Logo */}
         <View
           className="h-[44px] w-[44px] items-center justify-center rounded-[10px]"
           style={{ backgroundColor: job.logoBg }}
         >
           <Text
-            className="text-[18px]"
+            className="text-[18px] leading-[27px]"
             style={{ fontFamily: "PlusJakartaSans_800ExtraBold", color: job.logoColor }}
           >
             {job.logo}
           </Text>
         </View>
 
-        {/* Title + company */}
+        {/* Figma: Frame 245 - Job Title + Company */}
         <View className="ml-[14px] flex-1">
           <Text
             className="text-[14px] leading-[21px]"
@@ -176,10 +179,10 @@ function JobCard({ job, onToggleSave, onPress }) {
           </Text>
         </View>
 
-        {/* Match % badge */}
+        {/* Figma: Group 162 - Match % Badge */}
         <View className="rounded-[10px] bg-[#ebf6f7] px-[8px] py-[2px]">
           <Text
-            className="text-[11px] text-[#0d5c63]"
+            className="text-[11px] leading-[27px] text-[#0d5c63]"
             style={{ fontFamily: "PlusJakartaSans_700Bold" }}
           >
             {job.match}
@@ -187,25 +190,25 @@ function JobCard({ job, onToggleSave, onPress }) {
         </View>
       </View>
 
-      {/* Tags + bookmark */}
+      {/* Figma: Frame 251 - Tags + Bookmark Row */}
       <View className="mt-[10px] flex-row items-center justify-between">
         <View className="flex-row gap-x-[8px]">
-          {/* Salary tag */}
+          {/* Figma: Group 160 - Salary Tag */}
           <View
             className="rounded-[30px] px-[10px] py-[3px]"
             style={{ backgroundColor: "#e2b0530d", borderWidth: 1, borderColor: "#e2b053" }}
           >
             <Text
-              className="text-[10px] text-[#e2b053]"
+              className="text-[10px] leading-[27px] text-[#e2b053]"
               style={{ fontFamily: "PlusJakartaSans_600SemiBold" }}
             >
               {job.salary}
             </Text>
           </View>
-          {/* Type tag */}
+          {/* Figma: Group 161 - Remote Tag */}
           <View className="rounded-[30px] bg-[#ebf6f7] px-[10px] py-[3px]">
             <Text
-              className="text-[10px] text-[#0d5c63]"
+              className="text-[10px] leading-[27px] text-[#0d5c63]"
               style={{ fontFamily: "PlusJakartaSans_600SemiBold" }}
             >
               {job.type}
@@ -213,7 +216,7 @@ function JobCard({ job, onToggleSave, onPress }) {
           </View>
         </View>
 
-        {/* Bookmark */}
+        {/* Figma: Group 163 - Bookmark Icon */}
         <TouchableOpacity
           className="h-[24px] w-[24px] items-center justify-center rounded-full"
           style={{ borderWidth: 1, borderColor: "#e2b053" }}
@@ -251,6 +254,7 @@ function SectionHeader({ title, onSeeAll }) {
   );
 }
 
+// Figma: Group 167/168/169/170 - Category Row
 function CategoryRow({ item, onPress }) {
   const { Icon } = item;
   return (
@@ -258,12 +262,14 @@ function CategoryRow({ item, onPress }) {
       className="mb-[8px] flex-row items-center rounded-[16px] bg-[#ffffff] px-[14px] py-[13px]"
       onPress={() => onPress(item)}
     >
+      {/* Figma: Group 159 - Category Icon */}
       <View
         className="h-[44px] w-[44px] items-center justify-center rounded-[10px]"
         style={{ backgroundColor: item.iconBg }}
       >
         <Icon size={20} color={item.iconColor} />
       </View>
+      {/* Figma: Frame 245 - Category Label + Count */}
       <View className="ml-[14px] flex-1">
         <Text
           className="text-[14px] leading-[21px] text-[#1c1a2e]"
@@ -283,6 +289,7 @@ function CategoryRow({ item, onPress }) {
   );
 }
 
+// Figma: Group 182/183/184/185 - Trending Row
 function TrendingRow({ item, onPress }) {
   return (
     <TouchableOpacity
@@ -294,7 +301,7 @@ function TrendingRow({ item, onPress }) {
       }}
       onPress={() => onPress(item)}
     >
-      {/* Rank number */}
+      {/* Figma: Rank Number Text */}
       <View className="w-[63px] items-center justify-center">
         <Text
           className="text-[28px] leading-[21px]"
@@ -304,7 +311,7 @@ function TrendingRow({ item, onPress }) {
         </Text>
       </View>
 
-      {/* Icon */}
+      {/* Figma: Group 159 - Company Icon */}
       <View
         className="h-[50px] w-[50px] items-center justify-center rounded-[10px]"
         style={{ backgroundColor: "#e2b05312" }}
@@ -312,7 +319,7 @@ function TrendingRow({ item, onPress }) {
         <Paintbrush size={22} color="#e2b053" />
       </View>
 
-      {/* Company + views */}
+      {/* Figma: Frame 273 - Company Name + Views */}
       <View className="ml-[14px] flex-1">
         <Text
           className="text-[16px] leading-[21px] text-[#1c1a2e]"
@@ -320,6 +327,7 @@ function TrendingRow({ item, onPress }) {
         >
           {item.company}
         </Text>
+        {/* Figma: Group 185 - Views Count */}
         <View className="mt-[4px] flex-row items-center gap-x-[4px]">
           <Eye size={16} color="#4aacb5" />
           <Text
@@ -381,13 +389,14 @@ export default function HomeFeedScreen({ navigation }) {
 
   return (
     <SafeAreaView className="flex-1 bg-[#f9f5f0]">
-      {/* ── STICKY HEADER (Status Bar + Greeting + Search) ── */}
+      {/* Figma: Group 146 - Header Container */}
       <View className="bg-[#ffffff]">
-        {/* Status bar row */}
-        <View className="h-[45px]" />
+        {/* Figma: Status Bar */}
+        <View className="h-[45px] bg-[#ffffff]" />
 
-        {/* Greeting row */}
+        {/* Figma: Frame 234 - Greeting + Avatar Section */}
         <View className="flex-row items-center justify-between px-[20px] pt-[0px] pb-[8px]">
+          {/* Figma: Group 144 - Greeting Text */}
           <View>
             <Text
               className="text-[11px] leading-[16.5px] text-[#8a88a8]"
@@ -403,18 +412,18 @@ export default function HomeFeedScreen({ navigation }) {
             </Text>
           </View>
 
+          {/* Figma: Frame 233 - Bell + Avatar */}
           <View className="flex-row items-center gap-x-[10px]">
-          
-            {/* Bell */}
+            {/* Figma: Group 142 - Bell Icon with Notification */}
             <View className="relative h-[38px] w-[38px] items-center justify-center rounded-[11px] bg-[#f3efe9]">
               <Bell size={18} color="#4a4868" />
-              {/* Notification dot */}
+              {/* Figma: Group 143 - Notification Dot */}
               <View className="absolute right-[8px] top-[8px] h-[5px] w-[5px] rounded-full bg-[#e2b053]" />
             </View>
-              {/* Avatar */}
+            {/* Figma: Group 141 - Avatar */}
             <View className="h-[38px] w-[38px] items-center justify-center rounded-[11px] bg-[#0d5c63]">
               <Text
-                className="text-[14px] text-[#ffffff]"
+                className="text-[14px] leading-[21px] text-[#ffffff]"
                 style={{ fontFamily: "PlusJakartaSans_800ExtraBold" }}
               >
                 LK
@@ -423,7 +432,7 @@ export default function HomeFeedScreen({ navigation }) {
           </View>
         </View>
 
-        {/* Search bar */}
+        {/* Figma: Frame 235 - Search Bar */}
         <View className="px-[20px] pb-[12px]">
           <TouchableOpacity
             className="h-[45px] flex-row items-center rounded-[14px] bg-[#ffffff] px-[16px]"
@@ -442,26 +451,28 @@ export default function HomeFeedScreen({ navigation }) {
         </View>
       </View>
 
-      {/* ── SCROLLABLE CONTENT ── */}
+      {/* Figma: Frame 528 - Scrollable Content Container */}
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 96, paddingTop: 18, paddingHorizontal: 20 }}
       >
-        {/* Stats row */}
+        {/* Figma: Frame 244 - Stats Row */}
         <View className="flex-row gap-x-[8px]">
           {STATS.map((s, i) => (
             <StatCard key={i} {...s} />
           ))}
         </View>
 
-        {/* ── Featured Jobs ── */}
+        {/* Figma: Frame 254 - Featured Jobs Section */}
         <View className="mt-[22px]">
+          {/* Figma: Group 171 - Section Header */}
           <SectionHeader title="Featured jobs" />
+          {/* Figma: Frame 253 - Job Cards List */}
           {featuredJobs.map((job) => (
             <JobCard key={job.id} job={job} onToggleSave={toggleSaveFeatured} onPress={handleJobPress} />
           ))}
 
-          {/* Carousel dots */}
+          {/* Figma: Frame 263 - Carousel Dots */}
           <View className="mt-[4px] flex-row items-center justify-center gap-x-[8px]">
             {[0, 1, 2, 3, 4].map((i) => (
               <View
@@ -473,14 +484,16 @@ export default function HomeFeedScreen({ navigation }) {
           </View>
         </View>
 
-        {/* ── For You ── */}
+        {/* Figma: Frame 265 - For You Section */}
         <View className="mt-[28px]">
+          {/* Figma: Group 171 - Section Header */}
           <SectionHeader title="For you" />
+          {/* Figma: Frame 264 - Job Cards List */}
           {forYouJobs.map((job) => (
             <JobCard key={job.id} job={job} onToggleSave={toggleSaveForYou} onPress={handleJobPress} />
           ))}
 
-          {/* Carousel dots */}
+          {/* Figma: Frame 263 - Carousel Dots */}
           <View className="mt-[4px] flex-row items-center justify-center gap-x-[8px]">
             {[0, 1, 2, 3, 4].map((i) => (
               <View
@@ -492,17 +505,19 @@ export default function HomeFeedScreen({ navigation }) {
           </View>
         </View>
 
-        {/* ── Browse Categories ── */}
+        {/* Figma: Frame 267 - Browse Categories Section */}
         <View className="mt-[28px]">
+          {/* Figma: Group 171 - Section Header */}
           <SectionHeader title="Browse Categories" />
+          {/* Figma: Frame 253 - Category List */}
           {CATEGORIES.map((cat) => (
             <CategoryRow key={cat.id} item={cat} onPress={handleCategoryPress} />
           ))}
         </View>
 
-        {/* ── Trending ── */}
+        {/* Figma: Group 167 - Trending Section */}
         <View className="mt-[28px]">
-          {/* Trending header card */}
+          {/* Figma: Group 181 - Trending Header */}
           <View
             className="rounded-t-[16px] bg-[#0d5c63] px-[14px]"
             style={{ height: 59, flexDirection: "row", alignItems: "center" }}
@@ -520,7 +535,7 @@ export default function HomeFeedScreen({ navigation }) {
             <RefreshCcw size={18} color="#ffffff" />
           </View>
 
-          {/* Trending list */}
+          {/* Figma: Frame 274 - Trending List */}
           <View
             className="rounded-b-[16px] bg-[#ffffff] overflow-hidden"
             style={{ borderWidth: 1, borderColor: "#0d5c6333", borderTopWidth: 0 }}
@@ -532,7 +547,7 @@ export default function HomeFeedScreen({ navigation }) {
         </View>
       </ScrollView>
 
-      {/* ── BOTTOM NAV BAR ── */}
+      {/* Figma: Nav Bar - Bottom Navigation */}
       <BottomNavBar navigation={navigation} activeTab="home" />
     </SafeAreaView>
   );

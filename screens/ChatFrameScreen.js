@@ -1,11 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import {
-  SafeAreaView,
-  ScrollView,
+  View,
   Text,
   TouchableOpacity,
-  View,
   TextInput,
+  ScrollView,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
@@ -13,370 +12,246 @@ import {
   ChevronLeft,
   Phone,
   Video,
-  MoreHorizontal,
-  Send,
-  Plus,
-  Camera,
-  Mic,
-  Smile,
-  Paperclip,
-  Circle,
-  Check,
+  Info,
+  Bell,
+  ArrowRight,
   CheckCheck,
+  Calendar,
+  Check,
+  Link,
+  SmilePlus,
+  Send,
 } from "lucide-react-native";
+import AppStatusBar from "../components/AppStatusBar";
 
-// ─── DATA ────────────────────────────────────────────────────────────────────
-
-const SAMPLE_MESSAGES = [
-  {
-    id: "m1",
-    text: "Hi! I saw your application for the Senior Product Designer role at Figma. Your portfolio is impressive!",
-    sender: "other",
-    timestamp: "10:30 AM",
-    status: "read",
-    type: "text",
-  },
-  {
-    id: "m2", 
-    text: "Thank you so much! I'm really excited about the opportunity to work at Figma.",
-    sender: "me",
-    timestamp: "10:32 AM", 
-    status: "read",
-    type: "text",
-  },
-  {
-    id: "m3",
-    text: "I'd love to schedule a call to discuss your experience with design systems. Are you available this week?",
-    sender: "other",
-    timestamp: "10:35 AM",
-    status: "read", 
-    type: "text",
-  },
-  {
-    id: "m4",
-    text: "Absolutely! I'm free Tuesday or Wednesday afternoon. What works best for you?",
-    sender: "me",
-    timestamp: "10:37 AM",
-    status: "read",
-    type: "text",
-  },
-  {
-    id: "m5",
-    text: "Perfect! Let's do Wednesday at 2 PM. I'll send you a calendar invite with the meeting link.",
-    sender: "other", 
-    timestamp: "10:40 AM",
-    status: "read",
-    type: "text",
-  },
-  {
-    id: "m6",
-    text: "Sounds great! Looking forward to it. Should I prepare anything specific for our conversation?",
-    sender: "me",
-    timestamp: "10:42 AM",
-    status: "delivered",
-    type: "text",
-  },
-  {
-    id: "m7",
-    text: "Just be ready to walk through some of your recent projects and your design process. We're particularly interested in how you approach user research and prototyping.",
-    sender: "other",
-    timestamp: "10:45 AM", 
-    status: "delivered",
-    type: "text",
-  },
-  {
-    id: "m8",
-    text: "Thanks for the interview! Looking forward to hearing back from you.",
-    sender: "me",
-    timestamp: "2:15 PM",
-    status: "sent",
-    type: "text",
-  },
-];
-
-// ─── SUB-COMPONENTS ──────────────────────────────────────────────────────────
-
-function MessageBubble({ message }) {
-  const isMe = message.sender === "me";
-  
-  const getStatusIcon = () => {
-    if (!isMe) return null;
-    
-    switch (message.status) {
-      case "sent":
-        return <Check size={12} color="#8a88a8" />;
-      case "delivered":
-        return <CheckCheck size={12} color="#8a88a8" />;
-      case "read":
-        return <CheckCheck size={12} color="#0d5c63" />;
-      default:
-        return null;
-    }
-  };
+export default function ChatFrameScreen({ navigation }) {
+  const [messageText, setMessageText] = useState("");
 
   return (
-    <View className={`mb-[12px] flex-row ${isMe ? "justify-end" : "justify-start"}`}>
-      <View className={`max-w-[280px] ${isMe ? "items-end" : "items-start"}`}>
-        <View
-          className={`rounded-[16px] px-[16px] py-[12px] ${
-            isMe 
-              ? "bg-[#0d5c63] rounded-br-[4px]" 
-              : "bg-[#ffffff] border border-[#f0f0f0] rounded-bl-[4px]"
-          }`}
+    <View className="flex-1 bg-[#f9f5f0]">
+      {/* Figma: Status Bar */}
+      <AppStatusBar />
+
+      {/* Figma: Frame 146 - Header (h=64, px=16) */}
+      <View
+        className="bg-[#ffffff] flex-row items-center px-[16px]"
+        style={{ height: 64, borderBottomWidth: 1, borderBottomColor: "#0d5c6312" }}
+      >
+        {/* Figma: Group 142 - Back Button (33.4x33.4, radius=10) */}
+        <TouchableOpacity
+          className="items-center justify-center rounded-[10px] bg-[#f3efe9]"
+          style={{ width: 33.4, height: 33.4 }}
+          onPress={() => navigation.goBack()}
         >
-          <Text
-            className={`text-[15px] leading-[20px] ${
-              isMe ? "text-[#ffffff]" : "text-[#1c1a2e]"
-            }`}
-            style={{ fontFamily: "PlusJakartaSans_500Medium" }}
-          >
-            {message.text}
-          </Text>
-        </View>
-        
-        <View className={`mt-[4px] flex-row items-center ${isMe ? "flex-row-reverse" : "flex-row"}`}>
-          <Text
-            className="text-[12px] text-[#8a88a8]"
-            style={{ fontFamily: "PlusJakartaSans_400Regular" }}
-          >
-            {message.timestamp}
-          </Text>
-          {isMe && (
-            <View className="mr-[4px]">
-              {getStatusIcon()}
-            </View>
-          )}
-        </View>
-      </View>
-    </View>
-  );
-}
+          <ChevronLeft size={17.58} color="#4a4868" />
+        </TouchableOpacity>
 
-function DateSeparator({ date }) {
-  return (
-    <View className="my-[16px] items-center">
-      <View className="rounded-[12px] bg-[#f3efe9] px-[12px] py-[6px]">
-        <Text
-          className="text-[12px] text-[#8a88a8]"
-          style={{ fontFamily: "PlusJakartaSans_600SemiBold" }}
-        >
-          {date}
-        </Text>
-      </View>
-    </View>
-  );
-}
+        {/* Figma: Frame 268 - Avatar + Name (x=64.2, w=188) */}
+        <View className="flex-row items-center flex-1" style={{ marginLeft: 10.8 }}>
+          {/* Figma: Group 263 - Avatar (40x40, radius=13, bg=#7a618118) */}
+          <View
+            className="items-center justify-center"
+            style={{ width: 40, height: 40, borderRadius: 13, backgroundColor: "#7a618118" }}
+          >
+            <Text style={{ fontFamily: "PlusJakartaSans_700Bold", fontSize: 16, lineHeight: 16.5, color: "#7a6181" }}>
+              EC
+            </Text>
+          </View>
 
-function TypingIndicator() {
-  return (
-    <View className="mb-[12px] flex-row justify-start">
-      <View className="max-w-[280px] items-start">
-        <View className="rounded-[16px] rounded-bl-[4px] bg-[#ffffff] border border-[#f0f0f0] px-[16px] py-[12px]">
-          <View className="flex-row items-center">
-            <View className="flex-row items-center space-x-[2px]">
-              <Circle size={6} color="#8a88a8" fill="#8a88a8" />
-              <Circle size={6} color="#8a88a8" fill="#8a88a8" />
-              <Circle size={6} color="#8a88a8" fill="#8a88a8" />
+          {/* Figma: Frame 318 - Name + status (ml=8.53) */}
+          <View style={{ marginLeft: 8.53 }}>
+            <Text style={{ fontFamily: "PlusJakartaSans_700Bold", fontSize: 15, lineHeight: 22.5, color: "#1a1828" }}>
+              Emma Chen
+            </Text>
+            {/* Figma: Group 328 - green dot + role text */}
+            <View className="flex-row items-center">
+              {/* Figma: Ellipse 34 - green dot (6x6) */}
+              <View style={{ width: 6, height: 6, borderRadius: 3, backgroundColor: "#22c55e" }} />
+              <Text style={{ fontFamily: "PlusJakartaSans_400Regular", fontSize: 11, lineHeight: 16.5, color: "#8a88a8", marginLeft: 4 }}>
+                Recruiter · Figma
+              </Text>
             </View>
           </View>
         </View>
-        <Text
-          className="mt-[4px] text-[12px] text-[#8a88a8]"
-          style={{ fontFamily: "PlusJakartaSans_400Regular" }}
-        >
-          Sarah is typing...
-        </Text>
+
+        {/* Figma: Frame 142 - 3 action buttons (w=110, gap=5) */}
+        <View className="flex-row items-center" style={{ gap: 5 }}>
+          {/* Figma: Group 333 - Phone (33.4x33.4, radius=10) */}
+          <TouchableOpacity className="items-center justify-center rounded-[10px] bg-[#f3efe9]" style={{ width: 33.4, height: 33.4 }}>
+            <Phone size={16} color="#4a4868" />
+          </TouchableOpacity>
+          {/* Figma: Group 333 - Video */}
+          <TouchableOpacity className="items-center justify-center rounded-[10px] bg-[#f3efe9]" style={{ width: 33.4, height: 33.4 }}>
+            <Video size={16} color="#4a4868" />
+          </TouchableOpacity>
+          {/* Figma: Group 334 - Info */}
+          <TouchableOpacity className="items-center justify-center rounded-[10px] bg-[#f3efe9]" style={{ width: 33.4, height: 33.4 }}>
+            <Info size={16} color="#4a4868" />
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
-  );
-}
 
-// ─── MAIN SCREEN ─────────────────────────────────────────────────────────────
+      {/* Figma: Group 267 - Job Banner (h=53, bg=#ebf6f7, border=#c8e6e8) */}
+      <View
+        className="bg-[#ebf6f7] flex-row items-center px-[20px]"
+        style={{ height: 53, borderBottomWidth: 1, borderBottomColor: "#c8e6e8" }}
+      >
+        {/* Figma: bell icon (16x16) */}
+        <Bell size={16} color="#0d5c63" />
+        {/* Figma: Frame 399 - text (w=295, ml=13) */}
+        <Text
+          className="flex-1"
+          style={{ fontFamily: "PlusJakartaSans_400Regular", fontSize: 12, lineHeight: 18, color: "#000000", marginLeft: 13 }}
+        >
+          {"Discussing: "}
+          <Text style={{ fontFamily: "PlusJakartaSans_600SemiBold" }}>Sr. Product Designer at Figma</Text>
+          {" · "}
+          <Text style={{ fontFamily: "PlusJakartaSans_600SemiBold" }}>$140k–$180k</Text>
+        </Text>
+        {/* Figma: arrow-right icon (16x16) */}
+        <ArrowRight size={16} color="#0d5c63" />
+      </View>
 
-export default function ChatFrameScreen({ navigation, route }) {
-  const { chat } = route.params || {};
-  const [messages, setMessages] = useState(SAMPLE_MESSAGES);
-  const [inputText, setInputText] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
-  const scrollViewRef = useRef(null);
+      {/* Figma: Group 351 - Messages + Input */}
+      <KeyboardAvoidingView className="flex-1" behavior={Platform.OS === "ios" ? "padding" : "height"}>
+        <ScrollView className="flex-1 px-[20px]" showsVerticalScrollIndicator={false}>
 
-  useEffect(() => {
-    // Simulate typing indicator
-    const typingTimer = setTimeout(() => {
-      setIsTyping(true);
-      setTimeout(() => setIsTyping(false), 3000);
-    }, 2000);
+          {/* Figma: Group 336 - Date separator (x=153, y=181, w=88, h=21, radius=12) */}
+          <View className="items-center mt-[26px]">
+            <View className="items-center justify-center" style={{ width: 88, height: 21, borderRadius: 12, backgroundColor: "#f3efe9" }}>
+              <Text style={{ fontFamily: "PlusJakartaSans_400Regular", fontSize: 11, lineHeight: 16.5, color: "#8a88a8" }}>
+                Today, Apr 6
+              </Text>
+            </View>
+          </View>
 
-    return () => clearTimeout(typingTimer);
-  }, []);
+          {/* Figma: Group 350 - All messages container */}
 
-  function handleSendMessage() {
-    if (inputText.trim()) {
-      const newMessage = {
-        id: `m${messages.length + 1}`,
-        text: inputText.trim(),
-        sender: "me",
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        status: "sent",
-        type: "text",
-      };
-      
-      setMessages(prev => [...prev, newMessage]);
-      setInputText("");
-      
-      // Auto scroll to bottom
-      setTimeout(() => {
-        scrollViewRef.current?.scrollToEnd({ animated: true });
-      }, 100);
-    }
-  }
+          {/* Figma: Frame 403 - Received msg 1 (avatar bottom-aligned, bubble w=255) */}
+          <View className="mt-[15px] flex-row items-end">
+            {/* Figma: Group 264 - Avatar EC (30x30, radius=7, bg=#7a618118) */}
+            <View className="items-center justify-center" style={{ width: 30, height: 30, borderRadius: 7, backgroundColor: "#7a618118" }}>
+              <Text style={{ fontFamily: "PlusJakartaSans_600SemiBold", fontSize: 11, lineHeight: 16.5, color: "#7a6181" }}>EC</Text>
+            </View>
 
-  const getTypeColor = () => {
-    if (!chat) return "#0d5c63";
-    
-    switch (chat.type) {
-      case "recruiter":
-        return "#0d5c63";
-      case "hiring_manager":
-        return "#e2b053";
-      case "interviewer":
-        return "#8b5cf6";
-      case "hr":
-        return "#10b981";
-      default:
-        return "#8a88a8";
-    }
-  };
+            {/* Figma: Group 338 - Bubble (w=255, bg=#ffffff, radius mixed: TL=16,TR=16,BR=16,BL=0) */}
+            <View style={{ marginLeft: 8, width: 255, backgroundColor: "#ffffff", borderTopLeftRadius: 16, borderTopRightRadius: 16, borderBottomRightRadius: 16, borderBottomLeftRadius: 0, paddingHorizontal: 18, paddingTop: 10, paddingBottom: 10 }}>
+              {/* Figma: Group 337 - text + timestamp inside bubble */}
+              <Text style={{ fontFamily: "PlusJakartaSans_400Regular", fontSize: 14, lineHeight: 22.4, color: "#1a1828" }}>
+                Hi Sarah! I reviewed your portfolio and I'm really impressed with your design systems work at Airbnb.
+              </Text>
+              {/* Figma: 11:23 AM (inside bubble, below text) */}
+              <Text style={{ fontFamily: "PlusJakartaSans_400Regular", fontSize: 10, lineHeight: 15, color: "#8a88a8", marginTop: 2 }}>
+                11:23 AM
+              </Text>
+            </View>
+          </View>
 
-  return (
-    <SafeAreaView className="flex-1 bg-[#f9f5f0]">
-      {/* ── HEADER ── */}
-      <View className="bg-[#ffffff] px-[20px] pb-[12px] pt-[45px] border-b border-[#f0f0f0]">
-        <View className="flex-row items-center justify-between">
-          <View className="flex-row items-center flex-1">
-            <TouchableOpacity
-              className="h-[36px] w-[36px] items-center justify-center rounded-[10px] bg-[#f3efe9] mr-[12px]"
-              onPress={() => navigation.goBack()}
-            >
-              <ChevronLeft size={20} color="#4a4868" />
-            </TouchableOpacity>
-            
-            {/* Avatar & Info */}
-            <View className="flex-row items-center flex-1">
-              <View className="relative">
-                <View
-                  className="h-[44px] w-[44px] items-center justify-center rounded-[12px]"
-                  style={{ backgroundColor: `${getTypeColor()}15` }}
-                >
-                  <Text
-                    className="text-[14px]"
-                    style={{ 
-                      fontFamily: "PlusJakartaSans_700Bold",
-                      color: getTypeColor()
-                    }}
-                  >
-                    {chat?.avatar || "SJ"}
+          {/* Figma: Group 343 - Sent msg (bubble w=255, bg=#0d5c63, radius: TL=16,TR=16,BR=0,BL=16) */}
+          <View className="mt-[16px] flex-row justify-end">
+            <View style={{ width: 255, backgroundColor: "#0d5c63", borderTopLeftRadius: 16, borderTopRightRadius: 16, borderBottomRightRadius: 0, borderBottomLeftRadius: 16, paddingHorizontal: 19, paddingTop: 14, paddingBottom: 14 }}>
+              {/* Figma: Frame 404 - text */}
+              <Text style={{ fontFamily: "PlusJakartaSans_400Regular", fontSize: 14, lineHeight: 22.4, color: "#ffffff" }}>
+                Thank you so much Emma! I'm really excited about the opportunity at Figma — the product deeply aligns with how I work.
+              </Text>
+              {/* Figma: Group 342 - time + check-check (inside bubble, right-aligned) */}
+              <View className="flex-row items-center justify-end" style={{ marginTop: 4 }}>
+                <Text style={{ fontFamily: "PlusJakartaSans_400Regular", fontSize: 10, lineHeight: 15, color: "rgba(255,255,255,0.55)" }}>
+                  11:45 AM
+                </Text>
+                <CheckCheck size={14} color="rgba(255,255,255,0.55)" style={{ marginLeft: 4 }} />
+              </View>
+            </View>
+          </View>
+
+          {/* Figma: Frame 404 - Received msg 2 */}
+          <View className="mt-[16px] flex-row items-end">
+            {/* Figma: Group 264 - Avatar EC */}
+            <View className="items-center justify-center" style={{ width: 30, height: 30, borderRadius: 7, backgroundColor: "#7a618118" }}>
+              <Text style={{ fontFamily: "PlusJakartaSans_600SemiBold", fontSize: 11, lineHeight: 16.5, color: "#7a6181" }}>EC</Text>
+            </View>
+
+            {/* Figma: Group 338 - Bubble */}
+            <View style={{ marginLeft: 8, width: 255, backgroundColor: "#ffffff", borderTopLeftRadius: 16, borderTopRightRadius: 16, borderBottomRightRadius: 16, borderBottomLeftRadius: 0, paddingHorizontal: 18, paddingTop: 10, paddingBottom: 10 }}>
+              <Text style={{ fontFamily: "PlusJakartaSans_400Regular", fontSize: 14, lineHeight: 22.4, color: "#1a1828" }}>
+                Perfect! Sending you a Google Meet invite for Thursday at 2 PM.
+              </Text>
+              {/* Figma: 12:18 PM */}
+              <Text style={{ fontFamily: "PlusJakartaSans_400Regular", fontSize: 10, lineHeight: 15, color: "#8a88a8", marginTop: 2 }}>
+                12:18 PM
+              </Text>
+            </View>
+          </View>
+
+          {/* Figma: Group 349 - Video Interview Card (w=299, h=123, x=47 → right-aligned, radius=16, border=#c8e6e8) */}
+          <View className="mt-[16px] mb-[20px] items-end">
+            <View style={{ width: 299, borderRadius: 16, backgroundColor: "#ffffff", borderWidth: 1, borderColor: "#c8e6e8", paddingHorizontal: 19, paddingVertical: 17 }}>
+              {/* Figma: Frame 407 - calendar icon + title/time */}
+              <View className="flex-row items-center">
+                {/* Figma: Group 344 - calendar icon (38x38, radius=11, bg=#ebf6f7) */}
+                <View className="items-center justify-center" style={{ width: 38, height: 38, borderRadius: 11, backgroundColor: "#ebf6f7" }}>
+                  <Calendar size={18} color="#0d5c63" />
+                </View>
+                {/* Figma: Frame 405 - title + subtitle */}
+                <View style={{ marginLeft: 10, flex: 1 }}>
+                  <Text style={{ fontFamily: "PlusJakartaSans_700Bold", fontSize: 13, lineHeight: 19.5, color: "#1a1828" }}>
+                    Video Interview Invite
+                  </Text>
+                  <Text style={{ fontFamily: "PlusJakartaSans_400Regular", fontSize: 11, lineHeight: 16.5, color: "#8a88a8" }}>
+                    Thursday, Apr 4 · 2:00 PM · 45 min
                   </Text>
                 </View>
-                {chat?.online && (
-                  <View className="absolute -bottom-[2px] -right-[2px] h-[14px] w-[14px] items-center justify-center rounded-full bg-[#ffffff]">
-                    <View className="h-[10px] w-[10px] rounded-full bg-[#10b981]" />
-                  </View>
-                )}
               </View>
-              
-              <View className="ml-[12px] flex-1">
-                <Text
-                  className="text-[16px] text-[#1c1a2e]"
-                  style={{ fontFamily: "PlusJakartaSans_700Bold" }}
-                  numberOfLines={1}
-                >
-                  {chat?.name || "Sarah Johnson"}
-                </Text>
-                <Text
-                  className="text-[12px] text-[#8a88a8]"
-                  style={{ fontFamily: "PlusJakartaSans_500Medium" }}
-                  numberOfLines={1}
-                >
-                  {chat?.online ? "Active now" : "Last seen 2h ago"}
-                </Text>
+
+              {/* Figma: Frame 406 - Accept + Decline buttons (mt=14) */}
+              <View className="flex-row" style={{ marginTop: 14 }}>
+                {/* Figma: Group 347 - Accept (128x38, radius=10, bg=#0d5c63) */}
+                <TouchableOpacity className="flex-row items-center justify-center" style={{ width: 128, height: 38, borderRadius: 10, backgroundColor: "#0d5c63" }}>
+                  <Text style={{ fontFamily: "PlusJakartaSans_700Bold", fontSize: 12, lineHeight: 18, color: "#ffffff" }}>Accept</Text>
+                  <Check size={16} color="#ffffff" style={{ marginLeft: 5 }} />
+                </TouchableOpacity>
+                {/* Figma: Group 348 - Decline (128x38, radius=10, bg=#f3efe9, ml=5) */}
+                <TouchableOpacity className="items-center justify-center" style={{ width: 128, height: 38, borderRadius: 10, backgroundColor: "#f3efe9", marginLeft: 5 }}>
+                  <Text style={{ fontFamily: "PlusJakartaSans_700Bold", fontSize: 12, lineHeight: 18, color: "#7a6181" }}>Decline</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
-          
-          <View className="flex-row items-center gap-x-[8px]">
-            <TouchableOpacity className="h-[36px] w-[36px] items-center justify-center rounded-[10px] bg-[#f3efe9]">
-              <Phone size={18} color="#8a88a8" />
-            </TouchableOpacity>
-            <TouchableOpacity className="h-[36px] w-[36px] items-center justify-center rounded-[10px] bg-[#f3efe9]">
-              <Video size={18} color="#8a88a8" />
-            </TouchableOpacity>
-            <TouchableOpacity className="h-[36px] w-[36px] items-center justify-center rounded-[10px] bg-[#f3efe9]">
-              <MoreHorizontal size={18} color="#8a88a8" />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
 
-      {/* ── MESSAGES ── */}
-      <KeyboardAvoidingView 
-        className="flex-1"
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-      >
-        <ScrollView
-          ref={scrollViewRef}
-          className="flex-1 px-[20px]"
-          contentContainerStyle={{ paddingTop: 16, paddingBottom: 16 }}
-          showsVerticalScrollIndicator={false}
-        >
-          <DateSeparator date="Today" />
-          
-          {messages.map((message) => (
-            <MessageBubble key={message.id} message={message} />
-          ))}
-          
-          {isTyping && <TypingIndicator />}
         </ScrollView>
 
-        {/* ── INPUT BAR ── */}
-        <View className="bg-[#ffffff] px-[20px] py-[16px] border-t border-[#f0f0f0]">
-          <View className="flex-row items-end">
-            {/* Attachment Button */}
-            <TouchableOpacity className="h-[40px] w-[40px] items-center justify-center rounded-[12px] bg-[#f3efe9] mr-[8px]">
-              <Plus size={20} color="#8a88a8" />
+        {/* Figma: Group 356 - Input Bar (h=83, bg=#ffffff, border-top=#0d5c6312) */}
+        <View className="bg-[#ffffff]" style={{ height: 83, borderTopWidth: 1, borderTopColor: "#0d5c6312", justifyContent: "center" }}>
+          {/* Figma: Frame 409 - inner row (w=362, x=16, y=789→centered) */}
+          <View className="flex-row items-center" style={{ paddingHorizontal: 16 }}>
+            {/* Figma: Group 354 - Link button (36x36, radius=10, bg=#f3efe9) */}
+            <TouchableOpacity className="items-center justify-center rounded-[10px] bg-[#f3efe9]" style={{ width: 36, height: 36 }}>
+              <Link size={18} color="#4a4868" />
             </TouchableOpacity>
-            
-            {/* Input Container */}
-            <View className="flex-1 flex-row items-end rounded-[20px] bg-[#f3efe9] px-[16px] py-[8px] mr-[8px]">
+
+            {/* Figma: Group 352 - Input field (w=220, h=44, radius=22, bg=#f3efe9, ml=10) */}
+            <View style={{ width: 220, height: 44, borderRadius: 22, backgroundColor: "#f3efe9", marginLeft: 10, paddingHorizontal: 19, justifyContent: "center" }}>
               <TextInput
-                className="flex-1 max-h-[100px] text-[16px] text-[#1c1a2e]"
-                style={{ 
-                  fontFamily: "PlusJakartaSans_500Medium",
-                  paddingTop: Platform.OS === "ios" ? 8 : 4,
-                  paddingBottom: Platform.OS === "ios" ? 8 : 4,
-                }}
+                style={{ fontFamily: "PlusJakartaSans_400Regular", fontSize: 14, lineHeight: 21, color: "#8a88a8", textAlignVertical: "center", paddingVertical: 0 }}
                 placeholder="Type a message..."
                 placeholderTextColor="#8a88a8"
-                value={inputText}
-                onChangeText={setInputText}
-                multiline
-                textAlignVertical="center"
+                value={messageText}
+                onChangeText={setMessageText}
               />
             </View>
-            
-            {/* Send/Voice Button */}
-            <TouchableOpacity
-              className="h-[40px] w-[40px] items-center justify-center rounded-[12px]"
-              style={{
-                backgroundColor: inputText.trim() ? "#0d5c63" : "#f3efe9",
-              }}
-              onPress={inputText.trim() ? handleSendMessage : undefined}
-            >
-            <Send size={20} color="#8a88a8" />
+
+            {/* Figma: Group 353 - Emoji button (36x36, radius=10, bg=#f3efe9, ml=10) */}
+            <TouchableOpacity className="items-center justify-center rounded-[10px] bg-[#f3efe9]" style={{ width: 36, height: 36, marginLeft: 10 }}>
+              <SmilePlus size={18} color="#4a4868" />
+            </TouchableOpacity>
+
+            {/* Figma: Group 355 - Send button (40x40, radius=12, bg=#0d5c63, ml=10) */}
+            <TouchableOpacity className="items-center justify-center" style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: "#0d5c63", marginLeft: 10 }}>
+              <Send size={20} color="#ffffff" />
             </TouchableOpacity>
           </View>
         </View>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </View>
   );
 }
