@@ -9,7 +9,7 @@ export default function SignUp({ navigation }: any) {
 	const [textInput3, onChangeTextInput3] = useState("");
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: "#F9F5F0" }} edges={["left", "right"]}>
-			<ScrollView style={{ flex: 1, backgroundColor: "#F9F5F0", marginTop: 40 }} showsVerticalScrollIndicator={false}>
+			<ScrollView style={{ flex: 1, backgroundColor: "#F9F5F0", marginTop: 50 }} showsVerticalScrollIndicator={false}>
 				<View 
 					style={{
 						alignSelf: "flex-start",

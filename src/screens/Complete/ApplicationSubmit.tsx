@@ -58,12 +58,15 @@ const ApplicationSubmit = () => {
       </View>
 
       {/* Prep button */}
-      <TouchableOpacity style={styles.prepButton}>
+      <TouchableOpacity 
+        style={styles.prepButton}
+        onPress={() => navigation.navigate("TrackerAll")}
+      >
         <Text style={styles.prepButtonText}>Prep for Figma Interview</Text>
       </TouchableOpacity>
 
       {/* Back link */}
-      <TouchableOpacity onPress={() => navigation.goBack()}>
+      <TouchableOpacity onPress={() => navigation.navigate("TrackerAll")}>
         <Text style={styles.backLink}>Back to Applications</Text>
       </TouchableOpacity>
     </View>

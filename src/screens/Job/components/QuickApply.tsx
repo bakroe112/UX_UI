@@ -4,9 +4,10 @@ import { X, FileText, ChevronRight, Zap, PenTool, CircleCheckBig } from "lucide-
 
 interface QuickApplyProps {
   onClose: () => void;
+  navigation: any;
 }
 
-const QuickApply: React.FC<QuickApplyProps> = ({ onClose }) => {
+const QuickApply: React.FC<QuickApplyProps> = ({ onClose, navigation }) => {
   const [includeCoverLetter, setIncludeCoverLetter] = useState(false);
 
   return (
@@ -86,7 +87,13 @@ const QuickApply: React.FC<QuickApplyProps> = ({ onClose }) => {
 
           {/* Submit button */}
           <View style={styles.footer}>
-            <TouchableOpacity style={styles.submitButton} onPress={onClose}>
+            <TouchableOpacity 
+              style={styles.submitButton} 
+              onPress={() => {
+                onClose();
+                navigation.navigate("ApplyPersionalInfo");
+              }}
+            >
               <Text style={styles.submitButtonText}>Submit Application →</Text>
             </TouchableOpacity>
             <Text style={styles.footerNote}>

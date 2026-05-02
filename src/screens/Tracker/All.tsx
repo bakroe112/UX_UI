@@ -158,7 +158,11 @@ const TrackerAll = () => {
 
         {/* Application Cards */}
         {applications.map((app) => (
-          <View key={app.id} style={styles.applicationCard}>
+          <TouchableOpacity 
+            key={app.id} 
+            style={styles.applicationCard}
+            onPress={() => navigation.navigate("ApplicationDetail")}
+          >
             <View style={styles.cardContent}>
               <View style={[styles.initial, { backgroundColor: app.initialBg }]}>
                 <Text style={styles.initialText}>{app.initial}</Text>
@@ -177,7 +181,7 @@ const TrackerAll = () => {
                 <Text style={styles.cardApplied}>{app.applied}</Text>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
 
         {/* Interview Section */}
@@ -192,7 +196,10 @@ const TrackerAll = () => {
         </View>
 
         {/* Interview Cards */}
-        <View style={styles.applicationCard}>
+        <TouchableOpacity 
+          style={styles.applicationCard}
+          onPress={() => navigation.navigate("ApplicationDetail")}
+        >
           <View style={styles.cardContent}>
             <View style={[styles.initial, { backgroundColor: "#0D5C63B2" }]}>
               <Text style={styles.initialText}>F</Text>
@@ -209,9 +216,12 @@ const TrackerAll = () => {
               <Text style={styles.cardApplied}>Applied Apri1</Text>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
 
-        <View style={styles.applicationCard}>
+        <TouchableOpacity 
+          style={styles.applicationCard}
+          onPress={() => navigation.navigate("ApplicationDetail")}
+        >
           <View style={styles.cardContent}>
             <View style={[styles.initial, { backgroundColor: "#0D5C63B2" }]}>
               <Text style={styles.initialText}>N</Text>
@@ -228,7 +238,7 @@ const TrackerAll = () => {
               <Text style={styles.cardApplied}>Applied  Mar 30</Text>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.divider} />
       </ScrollView>

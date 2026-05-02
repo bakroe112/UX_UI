@@ -36,7 +36,7 @@ export default function SearchList({ navigation }: any) {
 							{/* Back button */}
 							<TouchableOpacity
 								style={{ width: 33, height: 33, borderRadius: 11, backgroundColor: "#F3EFE9", alignItems: "center", justifyContent: "center" }}
-								onPress={() => navigation.goBack()}
+								onPress={() => navigation.navigate("SearchBefore")}
 							>
 								<ChevronLeft size={18} color="#4A4868" />
 							</TouchableOpacity>
@@ -167,6 +167,7 @@ export default function SearchList({ navigation }: any) {
 								paddingVertical: 12,
 								marginBottom: 12
 							}}
+							onPress={() => navigation.navigate("JobDetail")}
 						>
 							{/* Company logo */}
 							<View style={{ flexDirection: "row" }}>

@@ -23,10 +23,14 @@ import TrackerAll from "./src/screens/Tracker/All";
 import TrackerScreening from "./src/screens/Tracker/Screening";
 import TrackerInterview from "./src/screens/Tracker/Interview";
 import TrackerOffers from "./src/screens/Tracker/Offers";
+import ApplicationDetail from "./src/screens/Tracker/ApplicationDetail";
 import ChatList from "./src/screens/Message/ChatList";
 import ChatFrame from "./src/screens/Message/ChatFrame";
 import ProfileOverview from "./src/screens/Profile/Overview";
 import ProfileSetting from "./src/screens/Profile/Setting";
+import AIMockInterview from "./src/screens/AIMockInterview/AIMockInterview";
+import InterviewSession from "./src/screens/AIMockInterview/InterviewSession";
+import SessionFeedback from "./src/screens/AIMockInterview/SessionFeedback";
 
 export type RootStackParamList = {
   ApplicationSubmit: undefined;
@@ -51,25 +55,34 @@ export type RootStackParamList = {
   TrackerScreening: undefined;
   TrackerInterview: undefined;
   TrackerOffers: undefined;
+  ApplicationDetail: undefined;
   ChatList: undefined;
   ChatFrame: undefined;
   ProfileOverview: undefined;
   ProfileSetting: undefined;
+  AIMockInterview: undefined;
+  InterviewSession: undefined;
+  SessionFeedback: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="TrackerAll">
-			<Stack.Screen name="TrackerAll" component={TrackerAll} />
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Welcome">
+			<Stack.Screen name="Welcome" component={Welcome} />
+      <Stack.Screen name="TrackerAll" component={TrackerAll} />
 			<Stack.Screen name="TrackerScreening" component={TrackerScreening} />
 			<Stack.Screen name="TrackerInterview" component={TrackerInterview} />
 			<Stack.Screen name="TrackerOffers" component={TrackerOffers} />
+			<Stack.Screen name="ApplicationDetail" component={ApplicationDetail} />
 			<Stack.Screen name="ChatList" component={ChatList} />
 			<Stack.Screen name="ChatFrame" component={ChatFrame} />
 			<Stack.Screen name="ProfileOverview" component={ProfileOverview} />
 			<Stack.Screen name="ProfileSetting" component={ProfileSetting} />
+			<Stack.Screen name="AIMockInterview" component={AIMockInterview} />
+			<Stack.Screen name="InterviewSession" component={InterviewSession} />
+			<Stack.Screen name="SessionFeedback" component={SessionFeedback} />
 			<Stack.Screen name="ApplicationSubmit" component={ApplicationSubmit} />
 			<Stack.Screen name="ApplyPersionalInfo" component={ApplyPersionalInfo} />
 			<Stack.Screen name="ApplyExperience" component={ApplyExperience} />
@@ -87,7 +100,6 @@ const App = () => {
 			<Stack.Screen name="QuizLocation" component={QuizLocation} />
 			<Stack.Screen name="QuizSalary" component={QuizSalary} />
 			<Stack.Screen name="HomeFeed" component={HomeFeed} />
-			<Stack.Screen name="Welcome" component={Welcome} />
       </Stack.Navigator>
     </NavigationContainer>
   );

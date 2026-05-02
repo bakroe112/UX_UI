@@ -96,7 +96,11 @@ const TrackerScreening = () => {
 
         {/* Application Cards */}
         {applications.map((app) => (
-          <View key={app.id} style={styles.applicationCard}>
+          <TouchableOpacity 
+            key={app.id} 
+            style={styles.applicationCard}
+            onPress={() => navigation.navigate("ApplicationDetail")}
+          >
             <View style={styles.cardContent}>
               <View style={[styles.initial, { backgroundColor: app.initialBg }]}>
                 <Text style={styles.initialText}>{app.initial}</Text>
@@ -115,7 +119,7 @@ const TrackerScreening = () => {
                 <Text style={styles.cardApplied}>{app.applied}</Text>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
 

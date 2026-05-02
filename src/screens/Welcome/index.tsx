@@ -120,7 +120,7 @@ function IconChart() {
 }
 
 // ── Screen ────────────────────────────────────────────────────────────────────
-export default function Welcome() {
+export default function Welcome({ navigation }: any) {
   return (
     <View style={{ flex: 1, backgroundColor: "#0D3B40" }}>
       <RNStatusBar barStyle="light-content" backgroundColor="transparent" translucent />
@@ -311,7 +311,7 @@ export default function Welcome() {
             shadowRadius: 24,
             elevation: 12,
           }}
-          onPress={() => {}}
+          onPress={() => navigation.navigate("SignUp")}
           activeOpacity={0.85}
         >
           <Text
@@ -338,7 +338,7 @@ export default function Welcome() {
             justifyContent: "center",
             marginBottom: 18,
           }}
-          onPress={() => {}}
+          onPress={() => navigation.navigate("SignIn")}
           activeOpacity={0.85}
         >
           <Text

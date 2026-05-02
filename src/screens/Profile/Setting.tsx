@@ -193,7 +193,10 @@ const ProfileSetting = () => {
         </View>
 
         {/* Log Out Button */}
-        <TouchableOpacity style={styles.logoutButton}>
+        <TouchableOpacity 
+          style={styles.logoutButton}
+          onPress={() => navigation.navigate("SignIn")}
+        >
           <Text style={styles.logoutText}>LOG OUT</Text>
         </TouchableOpacity>
 

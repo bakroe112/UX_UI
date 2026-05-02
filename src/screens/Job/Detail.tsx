@@ -186,7 +186,7 @@ const JobDetail = () => {
       </View>
 
       {/* Quick Apply Modal */}
-      {showQuickApply && <QuickApply onClose={() => setShowQuickApply(false)} />}
+      {showQuickApply && <QuickApply onClose={() => setShowQuickApply(false)} navigation={navigation} />}
     </View>
   );
 };

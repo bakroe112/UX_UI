@@ -59,15 +59,15 @@ export default function SearchBefore({ navigation }: any) {
 							shadowRadius: 4,
 							elevation: 0.4
 						}}>
+							<TouchableOpacity onPress={() => navigation.navigate("SearchList")}>
 							<View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>
 								<Search size={16} color="#8A88A8" />
 								<Text style={{ color: "#8A88A8", fontSize: 13, fontWeight: "400", lineHeight: 21, marginLeft: 6 }}>
 									Search jobs, companies, skills...
 								</Text>
 							</View>
-							<TouchableOpacity onPress={() => navigation.navigate("SearchList")}>
-								<SlidersVertical size={16} color="#0D5C63" />
 							</TouchableOpacity>
+								<SlidersVertical size={16} color="#0D5C63" />
 						</View>
 					</View>
 				</View>
@@ -98,6 +98,7 @@ export default function SearchBefore({ navigation }: any) {
 									borderBottomWidth: 1,
 									borderBottomColor: "#0D5C6312"
 								}}
+								onPress={() => navigation.navigate("SearchList")}
 							>
 								<View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>
 									<Clock size={16} color="#8A88A8" />
@@ -105,7 +106,9 @@ export default function SearchBefore({ navigation }: any) {
 										{search}
 									</Text>
 								</View>
-								<X size={16} color="#8A88A8" />
+								<TouchableOpacity onPress={(e) => e.stopPropagation()}>
+									<X size={16} color="#8A88A8" />
+								</TouchableOpacity>
 							</TouchableOpacity>
 						))}
 					</View>
@@ -129,6 +132,7 @@ export default function SearchBefore({ navigation }: any) {
 									borderBottomWidth: 1,
 									borderBottomColor: "#0D5C6312"
 								}}
+								onPress={() => navigation.navigate("SearchList")}
 							>
 								<View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>
 									<TrendingUp size={16} color="#0D5C63" />
@@ -171,6 +175,7 @@ export default function SearchBefore({ navigation }: any) {
 											shadowRadius: 8,
 											elevation: 4
 										}}
+										onPress={() => navigation.navigate("SearchList")}
 									>
 										<IconComponent size={20} color={category.iconColor} />
 										<Text style={{ color: category.iconColor, fontSize: 10, fontWeight: "600", marginTop: 5 }}>
@@ -201,6 +206,7 @@ export default function SearchBefore({ navigation }: any) {
 											shadowRadius: 8,
 											elevation: 4
 										}}
+										onPress={() => navigation.navigate("SearchList")}
 									>
 										<IconComponent size={20} color={category.iconColor} />
 										<Text style={{ color: category.iconColor, fontSize: 10, fontWeight: "600", marginTop: 5 }}>

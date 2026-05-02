@@ -155,11 +155,15 @@ function IconRefreshCcw() {
 // Salary tag: width=80, height=24, borderRadius=30, bg=#E2B0530D, border #E2B053, fontSize=10 SemiBold
 // Location tag: width=72, height=24, borderRadius=30, bg=#EBF6F7, fontSize=10 SemiBold #0D5C63
 // Bookmark: ellipse 24.55×23.6
-function JobCard({ title, subtitle, matchPercent, salary, location, saved = false, mb = 17 }: {
-  title: string; subtitle: string; matchPercent: string; salary: string; location: string; saved?: boolean; mb?: number;
+function JobCard({ title, subtitle, matchPercent, salary, location, saved = false, mb = 17, navigation }: {
+  title: string; subtitle: string; matchPercent: string; salary: string; location: string; saved?: boolean; mb?: number; navigation?: any;
 }) {
   return (
-    <View style={{ backgroundColor: "#FFFFFF", borderRadius: 16, paddingVertical: 11, paddingHorizontal: 14, marginBottom: mb, shadowColor: "#0D5C63", shadowOpacity: 0.03, shadowOffset: { width: 0, height: 0 }, shadowRadius: 1, elevation: 1 }}>
+    <TouchableOpacity 
+      style={{ backgroundColor: "#FFFFFF", borderRadius: 16, paddingVertical: 11, paddingHorizontal: 14, marginBottom: mb, shadowColor: "#0D5C63", shadowOpacity: 0.03, shadowOffset: { width: 0, height: 0 }, shadowRadius: 1, elevation: 1 }}
+      onPress={() => navigation?.navigate("JobDetail")}
+      activeOpacity={0.7}
+    >
       {/* Top row: paddingVertical=5, marginBottom=11 */}
       <View style={{ flexDirection: "row", alignItems: "center", paddingVertical: 5, marginBottom: 11 }}>
         {/* Logo: 44.25×44, marginRight=15 */}
@@ -188,9 +192,9 @@ function JobCard({ title, subtitle, matchPercent, salary, location, saved = fals
             <Text style={{ color: "#0D5C63", fontSize: 10, fontWeight: "600", lineHeight: 14, includeFontPadding: false }}>{location}</Text>
           </View>
         </View>
-        <TouchableOpacity onPress={() => {}}><IconBookmark filled={saved} /></TouchableOpacity>
+        <TouchableOpacity onPress={(e) => { e.stopPropagation(); }}><IconBookmark filled={saved} /></TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -300,12 +304,16 @@ export default function HomeFeed({ navigation }: any) {
 
           {/* Search bar: Frame 599, height=45, borderRadius=14, bg=#FFFFFF */}
           {/* paddingLeft=16 (icon at x=16), paddingRight=16 (filter at x=337) */}
-          <View style={{ height: 45, backgroundColor: "#FFFFFF", borderRadius: 14, flexDirection: "row", alignItems: "center", paddingHorizontal: 16, shadowColor: "#000000", shadowOpacity: 0.05, shadowOffset: { width: 0, height: 1 }, shadowRadius: 6, elevation: 3 }}>
+          <TouchableOpacity 
+            style={{ height: 45, backgroundColor: "#FFFFFF", borderRadius: 14, flexDirection: "row", alignItems: "center", paddingHorizontal: 16, shadowColor: "#000000", shadowOpacity: 0.05, shadowOffset: { width: 0, height: 1 }, shadowRadius: 6, elevation: 3 }}
+            onPress={() => navigation.navigate("SearchBefore")}
+            activeOpacity={0.7}
+          >
             <IconSearch />
             {/* "Search jobs...": fontSize=14, Regular, #8A88A8, lineHeight=21, x=43 */}
             <Text style={{ color: "#8A88A8", fontSize: 14, fontWeight: "400", lineHeight: 21, marginLeft: 11, flex: 1 }}>Search jobs, companies, skills...</Text>
             <IconFilter />
-          </View>
+          </TouchableOpacity>
         </View>
 
         {/* ── Frame 528: main content, padding bottom=18, left=20, right=20, top=18 ── */}
@@ -338,9 +346,9 @@ export default function HomeFeed({ navigation }: any) {
           {/* Featured jobs: Frame 254, y=105 */}
           <View style={{ marginBottom: 26 }}>
             <SectionHeader title="Featured jobs" />
-            <JobCard title="Senior Product Designer" subtitle="Figma · Remote" matchPercent="98%" salary="$140-160k" location="Remote" saved={false} mb={17} />
-            <JobCard title="Design Systems Lead" subtitle="Notion · SF / Remote" matchPercent="89%" salary="$130-155k" location="Remote" saved={true} mb={17} />
-            <JobCard title="Design Systems Lead" subtitle="Notion · SF / Remote" matchPercent="89%" salary="$130-155k" location="Remote" saved={true} mb={0} />
+            <JobCard title="Senior Product Designer" subtitle="Figma · Remote" matchPercent="98%" salary="$140-160k" location="Remote" saved={false} mb={17} navigation={navigation} />
+            <JobCard title="Design Systems Lead" subtitle="Notion · SF / Remote" matchPercent="89%" salary="$130-155k" location="Remote" saved={true} mb={17} navigation={navigation} />
+            <JobCard title="Design Systems Lead" subtitle="Notion · SF / Remote" matchPercent="89%" salary="$130-155k" location="Remote" saved={true} mb={0} navigation={navigation} />
           </View>
 
           {/* For you: Frame 266 (width=353, height=540) */}
@@ -358,17 +366,17 @@ export default function HomeFeed({ navigation }: any) {
             >
               {/* Page 1 — Frame 253: 4 cards dọc, gap=17 giữa các card */}
               <View style={{ width: 319, marginRight: 20 }}>
-                <JobCard title="Senior Product Designer" subtitle="Figma · Remote" matchPercent="98%" salary="$140-160k" location="Remote" saved={false} mb={17} />
-                <JobCard title="Design Systems Lead" subtitle="Notion · SF / Remote" matchPercent="89%" salary="$130-155k" location="Remote" saved={true} mb={17} />
-                <JobCard title="Design Systems Lead" subtitle="Notion · SF / Remote" matchPercent="89%" salary="$130-155k" location="Remote" saved={true} mb={17} />
-                <JobCard title="Design Systems Lead" subtitle="Notion · SF / Remote" matchPercent="89%" salary="$130-155k" location="Remote" saved={true} mb={0} />
+                <JobCard title="Senior Product Designer" subtitle="Figma · Remote" matchPercent="98%" salary="$140-160k" location="Remote" saved={false} mb={17} navigation={navigation} />
+                <JobCard title="Design Systems Lead" subtitle="Notion · SF / Remote" matchPercent="89%" salary="$130-155k" location="Remote" saved={true} mb={17} navigation={navigation} />
+                <JobCard title="Design Systems Lead" subtitle="Notion · SF / Remote" matchPercent="89%" salary="$130-155k" location="Remote" saved={true} mb={17} navigation={navigation} />
+                <JobCard title="Design Systems Lead" subtitle="Notion · SF / Remote" matchPercent="89%" salary="$130-155k" location="Remote" saved={true} mb={0} navigation={navigation} />
               </View>
               {/* Page 2 — Frame 264: 4 cards dọc */}
               <View style={{ width: 319 }}>
-                <JobCard title="Senior Product Designer" subtitle="Figma · Remote" matchPercent="98%" salary="$140-160k" location="Remote" saved={false} mb={17} />
-                <JobCard title="Design Systems Lead" subtitle="Notion · SF / Remote" matchPercent="89%" salary="$130-155k" location="Remote" saved={true} mb={17} />
-                <JobCard title="Design Systems Lead" subtitle="Notion · SF / Remote" matchPercent="89%" salary="$130-155k" location="Remote" saved={true} mb={17} />
-                <JobCard title="Design Systems Lead" subtitle="Notion · SF / Remote" matchPercent="89%" salary="$130-155k" location="Remote" saved={true} mb={0} />
+                <JobCard title="Senior Product Designer" subtitle="Figma · Remote" matchPercent="98%" salary="$140-160k" location="Remote" saved={false} mb={17} navigation={navigation} />
+                <JobCard title="Design Systems Lead" subtitle="Notion · SF / Remote" matchPercent="89%" salary="$130-155k" location="Remote" saved={true} mb={17} navigation={navigation} />
+                <JobCard title="Design Systems Lead" subtitle="Notion · SF / Remote" matchPercent="89%" salary="$130-155k" location="Remote" saved={true} mb={17} navigation={navigation} />
+                <JobCard title="Design Systems Lead" subtitle="Notion · SF / Remote" matchPercent="89%" salary="$130-155k" location="Remote" saved={true} mb={0} navigation={navigation} />
               </View>
             </ScrollView>
             {/* Frame 263: 5 dots, width=106, height=10, centered (x=123.5 of 353) */}
