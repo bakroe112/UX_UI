@@ -66,10 +66,35 @@ const TABS: { key: NavTab; label: string; Icon: React.FC<{ color: string }> }[] 
 ];
 
 export default function NavBar({ activeTab = "Home", onTabPress }: NavBarProps) {
+  // Calculate indicator position based on active tab
+  const getIndicatorPosition = () => {
+    const tabIndex = TABS.findIndex(tab => tab.key === activeTab);
+    // Each tab takes roughly 20% of the width (5 tabs)
+    // We need to calculate the left position for each tab
+    const positions = {
+      Home: 5,
+      Search: 69,
+      Applied: 157,
+      Messages: 242,
+      Profile: 324
+    };
+    return positions[activeTab] || 5;
+  };
+
   return (
-    <View style={{ backgroundColor: "#FFFFFFF2", paddingTop: 13, paddingBottom: 16, paddingHorizontal: 20 }}>
+    <View style={{ backgroundColor: "#FFFFFFFF", paddingTop: 13, paddingBottom: 16, paddingHorizontal: 20 }}>
       {/* Active indicator line */}
-      <View style={{ width: 24, height: 2, backgroundColor: "#0D5C63", marginBottom: 6, marginLeft: 5 }} />
+      <View style={{ position: "relative", height: 2, marginBottom: 6 }}>
+        <View 
+          style={{ 
+            position: "absolute",
+            width: 24, 
+            height: 2, 
+            backgroundColor: "#0D5C63",
+            left: getIndicatorPosition()
+          }} 
+        />
+      </View>
       <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
         {TABS.map(({ key, label, Icon }) => {
           const isActive = activeTab === key;

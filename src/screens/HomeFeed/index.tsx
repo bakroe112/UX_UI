@@ -252,7 +252,7 @@ function TrendingRow({ rank, company, views, rankOpacity, isLast = false }: {
 
 // ── Screen ────────────────────────────────────────────────────────────────────
 
-export default function HomeFeed() {
+export default function HomeFeed({ navigation }: any) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFFFF" }} edges={["left", "right"]}>
       <StatusBar />
@@ -419,7 +419,12 @@ export default function HomeFeed() {
           <View style={{ height: 16, backgroundColor: "#F9F5F0" }} />
         </View>
       </ScrollView>
-      <NavBar activeTab="Home" />
+      <NavBar activeTab="Home" 
+      onTabPress={(tab) => {
+					if (tab === "Search") navigation.navigate("SearchBefore");
+					// Add other navigation handlers as needed
+				}} 
+        />
     </SafeAreaView>
   );
 }

@@ -10,13 +10,16 @@ import QuizExperience from "./src/screens/Quiz/Experience";
 import QuizSkills from "./src/screens/Quiz/Skills";
 import QuizLocation from "./src/screens/Quiz/Location";
 import QuizSalary from "./src/screens/Quiz/Salary";
+import SearchList from "./src/screens/Search/List";
+import SearchBefore from "./src/screens/Search/Before";
+
 const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-			<Stack.Screen key={"HomeFeed"} name={"HomeFeed"} component={HomeFeed} />
-			
+			<Stack.Screen key={"SearchList"} name={"SearchList"} component={SearchList} />
+			<Stack.Screen key={"SearchBefore"} name={"SearchBefore"} component={SearchBefore} />
 			<Stack.Screen key={"SignIn"} name={"SignIn"} component={SignIn} />
 			<Stack.Screen key={"SignUp"} name={"SignUp"} component={SignUp} />
 			<Stack.Screen key={"QuizRole"} name={"QuizRole"} component={QuizRole} />
@@ -24,6 +27,7 @@ const App = () => {
 			<Stack.Screen key={"QuizSkills"} name={"QuizSkills"} component={QuizSkills} />
 			<Stack.Screen key={"QuizLocation"} name={"QuizLocation"} component={QuizLocation} />
 			<Stack.Screen key={"QuizSalary"} name={"QuizSalary"} component={QuizSalary} />
+			<Stack.Screen key={"HomeFeed"} name={"HomeFeed"} component={HomeFeed} />
 			<Stack.Screen key={"Welcome"} name={"Welcome"} component={Welcome} />
       </Stack.Navigator>
     </NavigationContainer>
