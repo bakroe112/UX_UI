@@ -78,7 +78,7 @@ export default function NavBar({ activeTab = "Home", onTabPress }: NavBarProps) 
       Home: 5,
       Search: 69,
       Applied: 140,
-      Messages: 242,
+      Messages: 216,
       Profile: 324
     };
     return positions[activeTab] || 5;

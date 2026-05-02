@@ -239,6 +239,7 @@ const TrackerAll = () => {
           if (tab === "Home") navigation.navigate("HomeFeed");
           else if (tab === "Search") navigation.navigate("SearchBefore");
           else if (tab === "Applied") navigation.navigate("TrackerAll");
+          else if (tab === "Messages") navigation.navigate("ChatList");
         }}
       />
     </View>

@@ -221,6 +221,7 @@ export default function SearchBefore({ navigation }: any) {
 					if (tab === "Home") navigation.navigate("HomeFeed");
 					else if (tab === "Search") navigation.navigate("SearchBefore");
 					else if (tab === "Applied") navigation.navigate("TrackerAll");
+					else if (tab === "Messages") navigation.navigate("ChatList");
 				}} 
 			/>
 		</SafeAreaView>
