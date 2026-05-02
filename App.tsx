@@ -12,12 +12,14 @@ import QuizLocation from "./src/screens/Quiz/Location";
 import QuizSalary from "./src/screens/Quiz/Salary";
 import SearchList from "./src/screens/Search/List";
 import SearchBefore from "./src/screens/Search/Before";
+import JobDetail from "./src/screens/Job/Detail";
 
 const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+			<Stack.Screen key={"JobDetail"} name={"JobDetail"} component={JobDetail} />
 			<Stack.Screen key={"SearchList"} name={"SearchList"} component={SearchList} />
 			<Stack.Screen key={"SearchBefore"} name={"SearchBefore"} component={SearchBefore} />
 			<Stack.Screen key={"SignIn"} name={"SignIn"} component={SignIn} />
