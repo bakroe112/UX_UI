@@ -219,7 +219,8 @@ export default function SearchBefore({ navigation }: any) {
 				activeTab="Search" 
 				onTabPress={(tab) => {
 					if (tab === "Home") navigation.navigate("HomeFeed");
-					// Add other navigation handlers as needed
+					else if (tab === "Search") navigation.navigate("SearchBefore");
+					else if (tab === "Applied") navigation.navigate("TrackerAll");
 				}} 
 			/>
 		</SafeAreaView>

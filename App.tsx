@@ -19,6 +19,10 @@ import ApplyDocument from "./src/screens/Apply/Document";
 import ApplyQuestions from "./src/screens/Apply/Questions";
 import ApplyReview from "./src/screens/Apply/Review";
 import ApplicationSubmit from "./src/screens/Complete/ApplicationSubmit";
+import TrackerAll from "./src/screens/Tracker/All";
+import TrackerScreening from "./src/screens/Tracker/Screening";
+import TrackerInterview from "./src/screens/Tracker/Interview";
+import TrackerOffers from "./src/screens/Tracker/Offers";
 
 export type RootStackParamList = {
   ApplicationSubmit: undefined;
@@ -39,13 +43,21 @@ export type RootStackParamList = {
   QuizSalary: undefined;
   HomeFeed: undefined;
   Welcome: undefined;
+  TrackerAll: undefined;
+  TrackerScreening: undefined;
+  TrackerInterview: undefined;
+  TrackerOffers: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="ApplyPersionalInfo">
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="TrackerAll">
+			<Stack.Screen name="TrackerAll" component={TrackerAll} />
+			<Stack.Screen name="TrackerScreening" component={TrackerScreening} />
+			<Stack.Screen name="TrackerInterview" component={TrackerInterview} />
+			<Stack.Screen name="TrackerOffers" component={TrackerOffers} />
 			<Stack.Screen name="ApplicationSubmit" component={ApplicationSubmit} />
 			<Stack.Screen name="ApplyPersionalInfo" component={ApplyPersionalInfo} />
 			<Stack.Screen name="ApplyExperience" component={ApplyExperience} />

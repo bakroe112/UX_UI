@@ -419,12 +419,14 @@ export default function HomeFeed({ navigation }: any) {
           <View style={{ height: 16, backgroundColor: "#F9F5F0" }} />
         </View>
       </ScrollView>
-      <NavBar activeTab="Home" 
-      onTabPress={(tab) => {
-					if (tab === "Search") navigation.navigate("SearchBefore");
-					// Add other navigation handlers as needed
-				}} 
-        />
+      <NavBar 
+        activeTab="Home" 
+        onTabPress={(tab) => {
+          if (tab === "Home") navigation.navigate("HomeFeed");
+          else if (tab === "Search") navigation.navigate("SearchBefore");
+          else if (tab === "Applied") navigation.navigate("TrackerAll");
+        }} 
+      />
     </SafeAreaView>
   );
 }
