@@ -25,6 +25,8 @@ import TrackerInterview from "./src/screens/Tracker/Interview";
 import TrackerOffers from "./src/screens/Tracker/Offers";
 import ChatList from "./src/screens/Message/ChatList";
 import ChatFrame from "./src/screens/Message/ChatFrame";
+import ProfileOverview from "./src/screens/Profile/Overview";
+import ProfileSetting from "./src/screens/Profile/Setting";
 
 export type RootStackParamList = {
   ApplicationSubmit: undefined;
@@ -51,6 +53,8 @@ export type RootStackParamList = {
   TrackerOffers: undefined;
   ChatList: undefined;
   ChatFrame: undefined;
+  ProfileOverview: undefined;
+  ProfileSetting: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -64,6 +68,8 @@ const App = () => {
 			<Stack.Screen name="TrackerOffers" component={TrackerOffers} />
 			<Stack.Screen name="ChatList" component={ChatList} />
 			<Stack.Screen name="ChatFrame" component={ChatFrame} />
+			<Stack.Screen name="ProfileOverview" component={ProfileOverview} />
+			<Stack.Screen name="ProfileSetting" component={ProfileSetting} />
 			<Stack.Screen name="ApplicationSubmit" component={ApplicationSubmit} />
 			<Stack.Screen name="ApplyPersionalInfo" component={ApplyPersionalInfo} />
 			<Stack.Screen name="ApplyExperience" component={ApplyExperience} />
