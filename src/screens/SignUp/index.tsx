@@ -3,7 +3,7 @@ import { View, ScrollView, Text, Image, TextInput, TouchableOpacity } from "reac
 import { SafeAreaView } from "react-native-safe-area-context";
 import StatusBar from "../../components/StatusBar";
 
-export default function SignUp() {
+export default function SignUp({ navigation }: any) {
 	const [textInput1, onChangeTextInput1] = useState("");
 	const [textInput2, onChangeTextInput2] = useState("");
 	const [textInput3, onChangeTextInput3] = useState("");
@@ -204,13 +204,20 @@ export default function SignUp() {
 									}}
 								/>
 							</View>
-							<Text 
-								style={{
-									color: "#8A88A8",
-									fontSize: 12,
-								}}>
-								{"I agree to HireFlow's Terms of Service and Privacy Policy "}
-							</Text>
+							<View style={{ flex: 1, flexDirection: "row", flexWrap: "wrap" }}>
+								<Text style={{ color: "#8A88A8", fontSize: 11 }}>
+									{"I agree to HireFlow's "}
+								</Text>
+								<Text style={{ color: "#0D5C63", fontSize: 11, fontWeight: "bold" }}>
+									{"Terms of Service"}
+								</Text>
+								<Text style={{ color: "#8A88A8", fontSize: 11 }}>
+									{" and "}
+								</Text>
+								<Text style={{ color: "#0D5C63", fontSize: 11, fontWeight: "bold" }}>
+									{"Privacy Policy"}
+								</Text>
+							</View>
 						</View>
 					</View>
 					<View >
@@ -370,7 +377,7 @@ export default function SignUp() {
 							alignItems: "center",
 							backgroundColor: "#0D5C63",
 							borderRadius: 14,
-							paddingVertical: 19,
+							paddingVertical: 17,
 							marginBottom: 18,
 							shadowColor: "#0D5C634D",
 							shadowOpacity: 0.3,
@@ -394,9 +401,11 @@ export default function SignUp() {
 						<Text style={{ color: "#8A88A8", fontSize: 13 }}>
 							{"Already have an account? "}
 						</Text>
-						<Text style={{ color: "#0D5C63", fontSize: 13, fontWeight: "bold" }}>
-							{"Sign in"}
-						</Text>
+						<TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
+							<Text style={{ color: "#0D5C63", fontSize: 13, fontWeight: "bold" }}>
+								{"Sign in"}
+							</Text>
+						</TouchableOpacity>
 					</View>
 				</View>
 			</ScrollView>

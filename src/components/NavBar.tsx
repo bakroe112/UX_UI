@@ -69,7 +69,7 @@ export default function NavBar({ activeTab = "Home", onTabPress }: NavBarProps) 
   return (
     <View style={{ backgroundColor: "#FFFFFFF2", paddingTop: 13, paddingBottom: 16, paddingHorizontal: 20 }}>
       {/* Active indicator line */}
-      <View style={{ width: 24, height: 2, backgroundColor: "#0D5C63", marginBottom: 11, marginLeft: 6 }} />
+      <View style={{ width: 24, height: 2, backgroundColor: "#0D5C63", marginBottom: 6, marginLeft: 5 }} />
       <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
         {TABS.map(({ key, label, Icon }) => {
           const isActive = activeTab === key;

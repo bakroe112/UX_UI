@@ -4,7 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
 import StatusBar from "../../components/StatusBar";
 
-export default function SignIn() {
+export default function SignIn({ navigation }: any) {
 	const [textInput1, onChangeTextInput1] = useState("");
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: "#F9F5F0" }} edges={["left", "right"]}>
@@ -375,7 +375,7 @@ export default function SignIn() {
 							alignItems: "center",
 							backgroundColor: "#0D5C63",
 							borderRadius: 14,
-							paddingVertical: 19,
+							paddingVertical: 17,
 							marginBottom: 18,
 							shadowColor: "#0D5C634D",
 							shadowOpacity: 0.3,
@@ -399,9 +399,11 @@ export default function SignIn() {
 						<Text style={{ color: "#8A88A8", fontSize: 13 }}>
 							{"New to HireFlow? "}
 						</Text>
+						<TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
 						<Text style={{ color: "#0D5C63", fontSize: 13, fontWeight: "bold" }}>
 							{"Create Account"}
 						</Text>
+						</TouchableOpacity>
 					</View>
 				</View>
 			</ScrollView>
