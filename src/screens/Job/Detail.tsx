@@ -13,7 +13,6 @@ const JobDetail = () => {
     <View style={styles.container}>
       {/* Status Bar */}
       <View style={styles.statusBar}>
-        <Text style={styles.time}>10:21</Text>
       </View>
 
       {/* Header */}

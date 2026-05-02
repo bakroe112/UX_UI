@@ -13,24 +13,57 @@ import QuizSalary from "./src/screens/Quiz/Salary";
 import SearchList from "./src/screens/Search/List";
 import SearchBefore from "./src/screens/Search/Before";
 import JobDetail from "./src/screens/Job/Detail";
+import ApplyPersionalInfo from "./src/screens/Apply/PersionalInfo";
+import ApplyExperience from "./src/screens/Apply/Experience";
+import ApplyDocument from "./src/screens/Apply/Document";
+import ApplyQuestions from "./src/screens/Apply/Questions";
+import ApplyReview from "./src/screens/Apply/Review";
+import ApplicationSubmit from "./src/screens/Complete/ApplicationSubmit";
 
-const Stack = createNativeStackNavigator();
+export type RootStackParamList = {
+  ApplicationSubmit: undefined;
+  ApplyPersionalInfo: undefined;
+  ApplyExperience: undefined;
+  ApplyDocument: undefined;
+  ApplyQuestions: undefined;
+  ApplyReview: undefined;
+  JobDetail: undefined;
+  SearchList: undefined;
+  SearchBefore: undefined;
+  SignIn: undefined;
+  SignUp: undefined;
+  QuizRole: undefined;
+  QuizExperience: undefined;
+  QuizSkills: undefined;
+  QuizLocation: undefined;
+  QuizSalary: undefined;
+  HomeFeed: undefined;
+  Welcome: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-			<Stack.Screen key={"JobDetail"} name={"JobDetail"} component={JobDetail} />
-			<Stack.Screen key={"SearchList"} name={"SearchList"} component={SearchList} />
-			<Stack.Screen key={"SearchBefore"} name={"SearchBefore"} component={SearchBefore} />
-			<Stack.Screen key={"SignIn"} name={"SignIn"} component={SignIn} />
-			<Stack.Screen key={"SignUp"} name={"SignUp"} component={SignUp} />
-			<Stack.Screen key={"QuizRole"} name={"QuizRole"} component={QuizRole} />
-			<Stack.Screen key={"QuizExperience"} name={"QuizExperience"} component={QuizExperience} />
-			<Stack.Screen key={"QuizSkills"} name={"QuizSkills"} component={QuizSkills} />
-			<Stack.Screen key={"QuizLocation"} name={"QuizLocation"} component={QuizLocation} />
-			<Stack.Screen key={"QuizSalary"} name={"QuizSalary"} component={QuizSalary} />
-			<Stack.Screen key={"HomeFeed"} name={"HomeFeed"} component={HomeFeed} />
-			<Stack.Screen key={"Welcome"} name={"Welcome"} component={Welcome} />
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="ApplyPersionalInfo">
+			<Stack.Screen name="ApplicationSubmit" component={ApplicationSubmit} />
+			<Stack.Screen name="ApplyPersionalInfo" component={ApplyPersionalInfo} />
+			<Stack.Screen name="ApplyExperience" component={ApplyExperience} />
+			<Stack.Screen name="ApplyDocument" component={ApplyDocument} />
+			<Stack.Screen name="ApplyQuestions" component={ApplyQuestions} />
+			<Stack.Screen name="ApplyReview" component={ApplyReview} />
+			<Stack.Screen name="JobDetail" component={JobDetail} />
+			<Stack.Screen name="SearchList" component={SearchList} />
+			<Stack.Screen name="SearchBefore" component={SearchBefore} />
+			<Stack.Screen name="SignIn" component={SignIn} />
+			<Stack.Screen name="SignUp" component={SignUp} />
+			<Stack.Screen name="QuizRole" component={QuizRole} />
+			<Stack.Screen name="QuizExperience" component={QuizExperience} />
+			<Stack.Screen name="QuizSkills" component={QuizSkills} />
+			<Stack.Screen name="QuizLocation" component={QuizLocation} />
+			<Stack.Screen name="QuizSalary" component={QuizSalary} />
+			<Stack.Screen name="HomeFeed" component={HomeFeed} />
+			<Stack.Screen name="Welcome" component={Welcome} />
       </Stack.Navigator>
     </NavigationContainer>
   );
