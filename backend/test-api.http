@@ -1,0 +1,162 @@
+### Test API Endpoints
+### Sử dụng REST Client extension trong VS Code để test
+
+@baseUrl = http://localhost:3000
+@token = your_jwt_token_here
+
+### Health Check
+GET {{baseUrl}}/health
+
+### ==================== AUTH ====================
+
+### Sign Up
+POST {{baseUrl}}/api/auth/signup
+Content-Type: application/json
+
+{
+  "email": "candidate@example.com",
+  "password": "password123",
+  "userData": {
+    "full_name": "John Doe",
+    "role": "candidate"
+  }
+}
+
+### Sign In
+POST {{baseUrl}}/api/auth/signin
+Content-Type: application/json
+
+{
+  "email": "candidate@example.com",
+  "password": "password123"
+}
+
+### Sign Out
+POST {{baseUrl}}/api/auth/signout
+Authorization: Bearer {{token}}
+
+### ==================== JOBS ====================
+
+### Get All Jobs
+GET {{baseUrl}}/api/jobs?page=1&limit=10
+
+### Get All Jobs with Search
+GET {{baseUrl}}/api/jobs?search=developer&location=Hanoi
+
+### Get Job by ID
+GET {{baseUrl}}/api/jobs/job-uuid-here
+
+### Create Job (Recruiter)
+POST {{baseUrl}}/api/jobs
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "recruiter_id": "user-uuid-here",
+  "title": "Senior Full Stack Developer",
+  "description": "We are looking for an experienced Full Stack Developer...",
+  "requirements": "5+ years of experience with React and Node.js",
+  "location": "Ho Chi Minh City",
+  "job_type": "full-time",
+  "salary_min": 30000000,
+  "salary_max": 50000000,
+  "status": "active"
+}
+
+### Update Job
+PUT {{baseUrl}}/api/jobs/job-uuid-here
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Senior Full Stack Developer (Updated)",
+  "salary_max": 60000000
+}
+
+### Delete Job
+DELETE {{baseUrl}}/api/jobs/job-uuid-here
+Authorization: Bearer {{token}}
+
+### ==================== APPLICATIONS ====================
+
+### Get All Applications
+GET {{baseUrl}}/api/applications
+
+### Get Applications by User
+GET {{baseUrl}}/api/applications?userId=user-uuid-here
+
+### Get Applications by Job
+GET {{baseUrl}}/api/applications?jobId=job-uuid-here
+
+### Get Application by ID
+GET {{baseUrl}}/api/applications/application-uuid-here
+
+### Submit Application
+POST {{baseUrl}}/api/applications
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "job_id": "job-uuid-here",
+  "user_id": "user-uuid-here",
+  "resume_url": "https://example.com/resume.pdf",
+  "cover_letter": "I am very interested in this position...",
+  "answers": {
+    "question1": "Answer 1",
+    "question2": "Answer 2"
+  }
+}
+
+### Update Application Status
+PATCH {{baseUrl}}/api/applications/application-uuid-here/status
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "status": "interview"
+}
+
+### ==================== PROFILES ====================
+
+### Get User Profile
+GET {{baseUrl}}/api/profiles/user-uuid-here
+
+### Update User Profile
+PUT {{baseUrl}}/api/profiles/user-uuid-here
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "full_name": "John Doe Updated",
+  "phone": "+84123456789",
+  "location": "Ho Chi Minh City",
+  "bio": "Experienced software developer...",
+  "skills": ["JavaScript", "React", "Node.js"]
+}
+
+### ==================== MESSAGES ====================
+
+### Get Conversations
+GET {{baseUrl}}/api/messages/conversations?userId=user-uuid-here
+Authorization: Bearer {{token}}
+
+### Get Messages in Conversation
+GET {{baseUrl}}/api/messages/conversation-uuid-here
+Authorization: Bearer {{token}}
+
+### Send Message
+POST {{baseUrl}}/api/messages
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "conversation_id": "conversation-uuid-here",
+  "sender_id": "user-uuid-here",
+  "content": "Hello, I have a question about the job..."
+}
+
+### ==================== ANALYTICS ====================
+
+### Get Recruiter Analytics
+GET {{baseUrl}}/api/analytics/recruiter/recruiter-uuid-here
+Authorization: Bearer {{token}}
